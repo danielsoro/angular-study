@@ -25,6 +25,10 @@
                 {nome: "Dave Grohl", telefone: "9999666"},
                 {nome: "Krist Novoselic", telefone: "9955777"},
             ]
+            $scope.adicionarContato = function(contato) {
+               $scope.contatos.push(angular.copy(contato));
+                delete $scope.contato;
+            }
         });
     </script>
 </head>
@@ -42,8 +46,11 @@
                 <td>{{contato.telefone}}</td>
             </tr>
         </table>
+        <hr/>
+        <input class="form-control" type="text" ng-model="contato.nome" placeholder="Nome"/>
+        <input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone"/>
+        <button class="btn btn-primary" ng-click="adicionarContato(contato)">Salvar</button>
     </div>
-    {{message}}
 </div>
 </body>
 </html>
