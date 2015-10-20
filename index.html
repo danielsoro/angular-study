@@ -20,10 +20,15 @@
         angular.module("helloWorld", []);
         angular.module("helloWorld").controller("helloWorldController", function ($scope) {
             $scope.title = "Lista telefonica";
+            $scope.operadoras = [
+                {nome: "Oi"},
+                {nome: "Tim"},
+                {nome: "Vivo"}
+            ]
             $scope.contatos = [
-                {nome: "Kurt Cobain", telefone: "9999999"},
-                {nome: "Dave Grohl", telefone: "9999666"},
-                {nome: "Krist Novoselic", telefone: "9955777"},
+                {nome: "Kurt Cobain", telefone: "9999999", operadora: {nome: "Oi", codigo: 1}},
+                {nome: "Dave Grohl", telefone: "9999666", operadora: {nome: "Tim", codigo: 2}},
+                {nome: "Krist Novoselic", telefone: "9955777", operadora: {nome: "Vivo", codigo: 3}},
             ]
             $scope.adicionarContato = function(contato) {
                $scope.contatos.push(angular.copy(contato));
@@ -40,16 +45,21 @@
             <tr>
                 <th>Nome</th>
                 <th>Telefone</th>
+                <th>Operadora</th>
             </tr>
             <tr ng-repeat="contato in contatos">
                 <td>{{contato.nome}}</td>
                 <td>{{contato.telefone}}</td>
+                <td>{{contato.operadora.nome}}</td>
             </tr>
         </table>
         <hr/>
         <input class="form-control" type="text" ng-model="contato.nome" placeholder="Nome"/>
         <input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone"/>
-        <button class="btn btn-primary" ng-click="adicionarContato(contato)">Salvar</button>
+        <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome for operadora in operadoras">
+            <option value="">Selecione uma operadora</option>
+        </select>
+        <button class="btn btn-primary" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone">Salvar</button>
     </div>
 </div>
 </body>
