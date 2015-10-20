@@ -1,16 +1,48 @@
 <html ng-app="helloWorld">
 <head>
     <title>Hello World</title>
-    <script src="angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
+    <style>
+        .jumbotron {
+            width: 400px;
+            text-align: center;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="lib/angular/angular.min.js"></script>
     <script>
         angular.module("helloWorld", []);
         angular.module("helloWorld").controller("helloWorldController", function ($scope) {
-            $scope.message = "Hello World!";
+            $scope.title = "Lista telefonica";
+            $scope.contatos = [
+                {nome: "Kurt Cobain", telefone: "9999999"},
+                {nome: "Dave Grohl", telefone: "9999666"},
+                {nome: "Krist Novoselic", telefone: "9955777"},
+            ]
         });
     </script>
 </head>
 <body>
 <div ng-controller="helloWorldController">
+    <div class="jumbotron">
+        <h3>{{title}}</h3>
+        <table class="table table-striped">
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+            <tr ng-repeat="contato in contatos">
+                <td>{{contato.nome}}</td>
+                <td>{{contato.telefone}}</td>
+            </tr>
+        </table>
+    </div>
     {{message}}
 </div>
 </body>
